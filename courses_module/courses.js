@@ -51,7 +51,7 @@ coursesRouter.post("/publishCourse", requirePublisherOrAdminRole, async (req, re
 
 coursesRouter.get("/getAllCourses", requireStudentOrAdminRole, async (req, res) => {
 
-    console.log(`Student id ${req.student_id}`);
+   // console.log(`Student id ${req.student_id}`);
     const result = await db.collection(courses_collection).find({course_approval_status: 'approved'}).toArray();
     res.json({ message: result });
     res.status(200);

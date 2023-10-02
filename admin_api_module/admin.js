@@ -51,7 +51,7 @@ adminRouter.post("/adminLogin", async (req, res) => {
                 res.json(token);
 
             }
-            else{
+            else {
                 res.status(401).send('Authentication Failed');
             }
         })
@@ -60,11 +60,11 @@ adminRouter.post("/adminLogin", async (req, res) => {
     else {
         res.send('Provided Email id does not exist in DB').status(401);
     }
-    
+
 });
 
 
-adminRouter.post("/createAdmin", async (req, res)=>{
+adminRouter.post("/createAdmin", async (req, res) => {
     const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
     const result = await db.collection(admin_collection).insertOne({
         role: 'admin',
@@ -98,7 +98,7 @@ adminRouter.get("/viewPendingCourses", requireAdminRoleOnly, async (req, res) =>
 
 });
 
-adminRouter.patch("/approveCourse/:course_id", async (req, res) => {
+adminRouter.patch("/approveCourse/:course_id", requireAdminRoleOnly, async (req, res) => {
     // Convert the course_id parameter to a string
     const course_id = req.params.course_id.toString();
 
@@ -106,6 +106,7 @@ adminRouter.patch("/approveCourse/:course_id", async (req, res) => {
     try {
         // Find the course by its _id
         const result = await db.collection(courses_collection).findOne({ _id: new ObjectId(course_id) });  // as in the mongodb document _id is stored by objectId.
+        console.log(result);
         if (!result) {
             res.json(`The course with course id ${course_id} does not exist`).status(200);
         } else {
@@ -117,6 +118,7 @@ adminRouter.patch("/approveCourse/:course_id", async (req, res) => {
                 // update publisher's document with the above course said to approve.
 
             );
+            updateApprovedCoursesList(result._id, result.course_title);
             updatePublisherCourseStatus(result.publisher_id, result.course_title);
             res.json(`Course with course id ${course_id} has been approved`).status(200);
         }
@@ -131,20 +133,109 @@ adminRouter.patch("/approveCourse/:course_id", async (req, res) => {
 async function updatePublisherCourseStatus(publisher_id, course_name) {
 
     try {
+        console.log('h1');
+        console.log(publisher_id);
         await db.collection(publisher_collection).updateOne({
-            id: new ObjectId(publisher_id)
+            _id: new ObjectId(publisher_id)
 
         }, {
+
             $push: {
                 created_courses: [{
                     course_name: course_name,
                     approval_time: new Date()
-                }
-                ]
+                }]
+
             }
+
         })
+        console.log('h2')
     }
     catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+adminRouter.patch("/rejectCourse/:course_id", requireAdminRoleOnly, async (req, res) => {
+    // Convert the course_id parameter to a string
+    const course_id = req.params.course_id.toString();
+
+
+    try {
+        // Find the course by its _id
+        const result = await db.collection(courses_collection).findOne({ _id: new ObjectId(course_id) });  // as in the mongodb document _id is stored by objectId.
+        console.log(result);
+        if (!result) {
+            res.json(`The course with course id ${course_id} does not exist`).status(200);
+        } else {
+            // Update the course_approval_status to 'approved'
+            await db.collection(courses_collection).updateOne(
+                { _id: new ObjectId(course_id) },
+                { $set: { course_approval_status: 'rejected' } }
+
+                // update publisher's document with the above course said to approve.
+
+            );
+            updateRejectedCoursesList(result._id, result.course_title);
+          //  updatePublisherCourseStatus(result.publisher_id, result.course_title);
+            res.json(`Course with course id ${course_id} has been Rejected`).status(200);
+        }
+    } catch (error) {
+        // Handle any errors that may occur during the database operation
+        console.error(error);
+        res.status(500).json({ message: 'Internal server error' });
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+async function updateApprovedCoursesList(course_id, course_name) {
+    try {
+        console.log(`course id - ${course_id}`)
+        console.log(`course_name - ${course_name}`)
+        await db.collection(admin_collection).updateOne({
+            _id: new ObjectId(process.env.ATLAS_ADMIN_ID)
+        }, {
+            $push: {
+                courses_approved: [{
+                    course_id: course_id,
+                    course_name: course_name
+                }]
+            }
+
+        })
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+
+
+
+async function updateRejectedCoursesList(course_id, course_name) {
+    try {
+        await db.collection(admin_collection).updateOne({
+            _id: new ObjectId(process.env.ATLAS_ADMIN_ID)
+        }, {
+            $push: {
+                courses_rejected: [{
+                    course_id: course_id,
+                    course_name: course_name
+                }]
+            }
+
+        })
+    } catch (error) {
         console.error(error);
     }
 }
