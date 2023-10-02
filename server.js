@@ -10,6 +10,8 @@ dotenv.config({
 const app = express();
 connectDB();
 
+connectDB();
+
 app.use("/api/v1/course", courses);
 
 const port = process.env.PORT || 5000;
