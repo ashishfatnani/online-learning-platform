@@ -8,7 +8,7 @@ exports.getCourses = (req, res, next) => {
     message: "This is View all course api",
   });
 };
-/*  @desc -> Get all the courses
+/*  @desc -> Get single course
     @route -> GET /api/v1/course
     @access -> Private (students) 
 */

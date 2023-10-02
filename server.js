@@ -1,6 +1,6 @@
 const express = require("express");
 const dotenv = require("dotenv");
-
+const connectDB = require("./config/db");
 const courses = require("./routes/courses");
 
 dotenv.config({
@@ -8,6 +8,7 @@ dotenv.config({
 });
 
 const app = express();
+connectDB();
 
 app.use("/api/v1/course", courses);
 
@@ -17,4 +18,11 @@ app.listen(port, () => {
   console.log(
     `Server runnning on PORT ${port} with ${process.env.NODE_ENV} environment`
   );
+});
+
+// Handle unhandled promise rejections
+process.on("unhandledRejection", (err, promise) => {
+  console.log(`Error: ${err.message}`);
+  // Close server & exit process
+  // server.close(() => process.exit(1));
 });
