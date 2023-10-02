@@ -1,28 +1,37 @@
-const express = require("express");
-const dotenv = require("dotenv");
-const connectDB = require("./config/db");
-const courses = require("./routes/courses");
-
-dotenv.config({
-  path: "./config/config.env",
-});
-
+const express = require('express');
+const mongoose = require('mongoose');
+require('dotenv').config();
 const app = express();
-connectDB();
+const adminLoginRouter = require('./admin_api_module/admin');
+const coursesRouter = require('./courses_module/courses');
+const studentRouter = require('./student_api_module/student-portal-api');
+const studentManagement = require('./student_api_module/student-management');
+const publisherManagement = require('./publisher_api_module/publisher-management');
 
-app.use("/api/v1/course", courses);
+const databaseURI = process.env.ATLAS_CONNECTION_URI;
 
-const port = process.env.PORT || 5000;
+app.use("/api/courses", coursesRouter);
+app.use("/api/admin", adminLoginRouter);
+app.use("/api/student", studentRouter, studentManagement);
+app.use("/api/publisher", publisherManagement);
 
-app.listen(port, () => {
-  console.log(
-    `Server runnning on PORT ${port} with ${process.env.NODE_ENV} environment`
-  );
-});
 
-// Handle unhandled promise rejections
-process.on("unhandledRejection", (err, promise) => {
-  console.log(`Error: ${err.message}`);
-  // Close server & exit process
-  // server.close(() => process.exit(1));
-});
+//CONNECT TO MONGODB
+async function connectToMongoDB(){
+    try{
+        await mongoose.connect(databaseURI);
+        console.log("Successfully Connected to MongoDB Atlas Cloud");
+    }
+    catch(error){
+        console.error(error);
+    }
+}
+
+connectToMongoDB();
+
+
+
+app.listen(8000, (req, res)=>{
+    //res.send("Project is up !!");
+    console.log("Project is up !!");
+})
