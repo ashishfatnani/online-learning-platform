@@ -3,14 +3,14 @@ const slugify = require("slugify");
 
 const CourseSchema = new mongoose.Schema(
   {
-    name: {
+    courseTitle: {
       type: String,
-      required: [true, "Please add a course name"],
+      required: [true, "Please add a Course Title"],
       unique: true,
       trim: true,
-      maxlength: [100, "Name can not be more than 100 characters"],
+      maxlength: [100, "Course Title can not be more than 100 characters"],
     },
-    description: {
+    courseDescription: {
       type: String,
       required: [true, "Please add a description"],
       maxlength: [500, "Description can not be more than 500 characters"],
@@ -22,13 +22,21 @@ const CourseSchema = new mongoose.Schema(
         "Please use a valid URL with HTTP or HTTPS",
       ],
     },
-    price: {
+    coursePrice: {
       type: Number,
       required: [true, "Please add a Price in $"],
     },
     duration: {
       type: Number,
       required: [true, "Please add duration of the course in mins"],
+    },
+    courseApprovalStatus: {
+      type: String,
+      enum: ["approved", "pending"],
+      default: "pending",
+    },
+    courseContent: {
+      type: Object,
     },
     createdAt: {
       type: Date,
