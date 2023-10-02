@@ -8,7 +8,12 @@ dotenv.config({
 });
 
 const app = express();
+
+//Connect to DB
 connectDB();
+
+//Body Parser
+app.use(express.json());
 
 app.use("/api/v1/course", courses);
 

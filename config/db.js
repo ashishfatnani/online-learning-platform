@@ -10,4 +10,5 @@ const connectDB = async () => {
     `MongoDB connection established with Host Name: ${conn.connection.host}`
   );
 };
+
 module.exports = connectDB;
