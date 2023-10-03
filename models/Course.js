@@ -42,11 +42,11 @@ const CourseSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    //   publisher: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'Publisher',
-    //     required: true
-    //   }
+    publisher: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Publisher",
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },

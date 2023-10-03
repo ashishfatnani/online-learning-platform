@@ -5,13 +5,14 @@
 const Course = require("../models/Course");
 const Publisher = require("../models/Publisher");
 
-
 exports.createCourse = async (req, res, next) => {
   try {
-    const createData = await Course.create(req.body);
+    const createData = await Course.create({
+      ...req.body,
+      publisher: req.publisher_id,
+    });
 
     console.log(`publisher id - -- -- - - -- - ${req.publisher_id}`);
-
 
     return res.status(201).json({
       success: true,
