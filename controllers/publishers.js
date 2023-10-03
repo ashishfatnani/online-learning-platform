@@ -64,3 +64,25 @@ exports.getPendingCourses = async (req, res, next) => {
     });
   }
 };
+
+/*  @desc -> Get all rejected courses
+    @route -> GET /api/v1/courses/publishers/rejectedcourses
+    @access -> Publishers
+*/
+exports.getRejectedCourses = async (req, res, next) => {
+  try {
+    const courseData = await Course.find({
+      courseApprovalStatus: "rejected",
+    });
+    return res.status(200).json({
+      success: true,
+      data: courseData,
+      count: courseData.length,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
