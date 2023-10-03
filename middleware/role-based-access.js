@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 
-exports.requireStudentOrAdminRole = async (req, res, next) =>{
+exports.requireStudentOrAdminRole = (req, res, next) =>{
     const token = req.header('Authorization').split(' ')[1]; // "Bearer <token>"
     
     try {
@@ -22,7 +22,7 @@ exports.requireStudentOrAdminRole = async (req, res, next) =>{
   
 exports.requirePublisherOrAdminRole = async (req, res, next) => {
    
-    const token = req.header('Authorization').split(' ')[1]; // Assuming the token is sent as "Bearer <token>"
+    const token = req.header('Authorization').split(' ')[1]; 
     
     try {
     console.log(process.env.JWT_TOKEN);
