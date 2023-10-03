@@ -4,6 +4,7 @@ const router = express.Router();
 
 router.route("/").post(createCourse);
 router.route("/publishers/approvedcourses").get(getApprovedCourses);
+router.route("/publishers/pendingcourses").get(getApprovedCourses);
 // .post(createCourse);
 
 // router.route("/:id").get(getCourse).put(updateCourse).delete(deleteCourse);
