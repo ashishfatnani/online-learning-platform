@@ -47,7 +47,7 @@ exports.getApprovedCourses = async (req, res, next) => {
     @access -> Publishers
 */
 
-exports.getApprovedCourses = async (req, res, next) => {
+exports.getPendingCourses = async (req, res, next) => {
   try {
     const courseData = await Course.find({
       courseApprovalStatus: "pending",
