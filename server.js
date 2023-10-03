@@ -31,7 +31,7 @@ app.use(express.json());
 // app.use("/api/v1/course", courses);
 
 app.use("/api/v1/publishers/courses",requirePublisherOrAdminRole, publishers);
-app.use("/api/v1/students/courses", students);
+app.use("/api/v1/students/courses", requireStudentOrAdminRole, students);
 // 
 //courses
 //app.use("/api/v1/courseByPublisher", requirePublisherOrAdminRole, courses); // ADDED PUBLISHER ACCESS ONLY FOR NOW

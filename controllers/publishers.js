@@ -12,7 +12,7 @@ exports.createCourse = async (req, res, next) => {
       publisher: req.publisher_id,
     });
 
-    console.log(`publisher id - -- -- - - -- - ${req.publisher_id}`);
+    //console.log(`publisher id - -- -- - - -- - ${req.publisher_id}`);
 
     return res.status(201).json({
       success: true,

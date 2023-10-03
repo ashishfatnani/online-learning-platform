@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 exports.requireStudentOrAdminRole = (req, res, next) =>{
     const token = req.header('Authorization').split(' ')[1]; // "Bearer <token>"
-    
+  
     try {
       const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
       const userRole = decodedToken.role;
