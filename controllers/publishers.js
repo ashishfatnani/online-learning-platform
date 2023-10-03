@@ -19,6 +19,41 @@ exports.createCourse = async (req, res, next) => {
   }
 };
 
+/*  @desc -> Update courses 
+    @route -> GET /api/v1/courses/updatecourse/:courseId
+    @access -> Publishers
+*/
+exports.updateCourse = async (req, res, next) => {
+  //const courseId = req.params.id;
+  const updatedCourseData = req.body;
+
+  try {
+    const course = await Course.findOne({courseId:req.params.id});
+    if (!course) {
+      return res.status(404).json({
+        success: false,
+        message: 'Course not found.',
+      });
+    }
+
+    // Update the course data
+    Object.assign(course, updatedCourseData);
+
+    // Save the updated course
+    await course.save();
+
+    return res.status(200).json({
+      success: true,
+      message: `Course ${req.params.courseId} updated successfully.`,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 /*  @desc -> Get all the approved courses
     @route -> GET /api/v1/courses/publishers/approvedcourses
     @access -> Publishers
