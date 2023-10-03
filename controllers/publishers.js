@@ -18,3 +18,26 @@ exports.createCourse = async (req, res, next) => {
     });
   }
 };
+
+/*  @desc -> Get all the approved courses
+    @route -> GET /api/v1/courses/publishers/approvedcourses
+    @access -> Publishers
+*/
+exports.getApprovedCourses = async (req, res, next) => {
+  try {
+    const courseData = await Course.find({
+      courseApprovalStatus: "approved",
+    });
+    console.log(12345 ,courseData);
+    return res.status(200).json({
+      success: true,
+      data: courseData,
+      count: courseData.length,
+    });
+  } catch (error) {
+    return res.status(400).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
