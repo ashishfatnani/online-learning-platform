@@ -30,6 +30,13 @@ exports.getSingleCourse = async (req, res, next) => {
     const courseData = await Course.findOne({
       _id: req.params.id,
     });
+
+    if (!courseData) {
+      return res.status(400).json({
+        success: false,
+        message: "Something went wrong!",
+      });
+    }
     return res.status(200).json({
       success: true,
       data: courseData,
