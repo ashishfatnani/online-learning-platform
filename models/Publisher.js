@@ -8,7 +8,7 @@ const PublisherSchema = new mongoose.Schema(
       required: [true, "Please add first name"],
       unique: true,
       trim: true,
-      maxlength: [50, " First Name can not be more than 50 characters"],
+      maxlength: [50, "First Name can not be more than 50 characters"],
     },
     lastName: {
       type: String,
@@ -63,11 +63,11 @@ const PublisherSchema = new mongoose.Schema(
       type: Date,
       default: Date.now,
     },
-    //   publisher: {
-    //     type: mongoose.Schema.ObjectId,
-    //     ref: 'Publisher',
-    //     required: true
-    //   }
+    publisher: {
+      type: mongoose.Schema.ObjectId,
+      ref: "Publisher",
+      required: true,
+    },
   },
   {
     toJSON: { virtuals: true },

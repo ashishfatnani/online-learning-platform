@@ -1,7 +1,9 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
-const courses = require("./routes/courses");
+const publishers = require("./routes/publishers");
+const students = require("./routes/students");
+// const courses = require("./routes/courses");
 
 dotenv.config({
   path: "./config/config.env",
@@ -15,7 +17,9 @@ connectDB();
 //Body Parser
 app.use(express.json());
 
-app.use("/api/v1/course", courses);
+// app.use("/api/v1/course", courses);
+
+app.use("/api/v1/courses", students, publishers);
 
 const port = process.env.PORT || 5000;
 
