@@ -1,11 +1,17 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
+const publishers = require("./routes/publishers");
+const students = require("./routes/students");
+// const courses = require("./routes/courses");
 const courses = require("./routes/courses");
-const registration = require("./routes/registration")
+const registration = require("./routes/registration");
 const login = require("./routes/login");
-const changeProfile = require('./routes/change-profile')
-const {requireStudentOrAdminRole, requirePublisherOrAdminRole} = require('./middleware/role-based-access')
+const changeProfile = require("./routes/change-profile");
+const {
+  requireStudentOrAdminRole,
+  requirePublisherOrAdminRole,
+} = require("./middleware/role-based-access");
 
 dotenv.config({
   path: "./config/config.env",
@@ -19,23 +25,31 @@ connectDB();
 //Body Parser
 app.use(express.json());
 
+// app.use("/api/v1/course", courses);
+
+app.use("/api/v1/courses", students, publishers);
 //courses
 app.use("/api/v1/course", courses);
 
 //register
-app.use("/api/v1/register", registration)
+app.use("/api/v1/register", registration);
 
 //login
-app.use("/api/v1/login", login)
+app.use("/api/v1/login", login);
 
 //change-profile
-app.use("/api/v1/changeStudentProfile", requireStudentOrAdminRole, changeProfile)
-app.use("/api/v1/changePublisherProfile", requirePublisherOrAdminRole, changeProfile)
-
+app.use(
+  "/api/v1/changeStudentProfile",
+  requireStudentOrAdminRole,
+  changeProfile
+);
+app.use(
+  "/api/v1/changePublisherProfile",
+  requirePublisherOrAdminRole,
+  changeProfile
+);
 
 //app.use("/api/v1/register", authentication)
-
-
 
 const port = process.env.PORT || 5000;
 

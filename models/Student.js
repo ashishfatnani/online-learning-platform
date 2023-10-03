@@ -8,8 +8,7 @@ const StudentSchema = new mongoose.Schema(
       required: [true, "Please add first name"],
       //unique: true,
       trim: true,
-      maxlength: [50, " First Name can not be more than 50 characters"],
-
+      maxlength: [50, "First Name can not be more than 50 characters"],
     },
     lastName: {
       type: String,
@@ -40,7 +39,7 @@ const StudentSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please add a password"],
       minlength: 6,
-     select: true,
+      select: true,
     },
     balance: {
       type: Number,
@@ -51,10 +50,8 @@ const StudentSchema = new mongoose.Schema(
       type: Array,
       default: [],
     },
-
     resetPasswordToken: String,
     resetPasswordExpire: Date,
-
     createdAt: {
       type: Date,
       default: Date.now,
