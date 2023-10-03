@@ -1,21 +1,26 @@
-const express = require("express");
-const {
-  getCourse,
-  getCourses,
-  updateCourse,
-  deleteCourse,
-  createCourse,
-} = require("../controllers/courses");
+// const express = require("express");
+// const {
+//   getCourse,
+//   getCourses,
+//   updateCourse,
+//   deleteCourse,
+//   createCourse,
+// } = require("../controllers/courses");
 
-const {
-  registerStudent
-} = require("../controllers/registration")
-const router = express.Router();
+// const {createCourseByPublisher} = require('../controllers/publishers')
 
-router.route("/").get(getCourses).post(createCourse);
+ 
+// const {
+//   registerStudent
+// } = require("../controllers/registration")
 
-router.route("/:id").get(getCourse).put(updateCourse).delete(deleteCourse);
+// const router = express.Router();
 
-router.route("/").post(registerStudent)
+// router.route("/").post(createCourseByPublisher)
+// router.route("/").get(getCourses).post(createCourse);
 
-module.exports = router;
+// router.route("/:id").get(getCourse).put(updateCourse).delete(deleteCourse);
+
+// router.route("/").post(registerStudent)
+
+// module.exports = router;

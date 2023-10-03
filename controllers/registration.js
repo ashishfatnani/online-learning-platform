@@ -1,5 +1,6 @@
 const Student = require("../models/Student");
 const Publisher = require('../models/Publisher');
+const Admin = require('../models/Admin');
 const bcrypt = require("bcrypt");
 const saltRounds = 10; 
 
@@ -24,7 +25,7 @@ exports.registerStudent = async (req,res,next)=>{
                 lastName: req.body.lastName,
                 email: req.body.email,
                 password: encryptedPassword,
-                role: req.body.role,
+                role: 'student',
                 balance: 1000,
                 courses_enrolled: []
             });
@@ -37,7 +38,6 @@ exports.registerStudent = async (req,res,next)=>{
 exports.registerPublisher = async (req,res,next)=>{
     
     const isAlreadyExisting = await Publisher.findOne({ email: req.body.email });
-    console.log(isAlreadyExisting);
         if (isAlreadyExisting) {
             res.send("Publisher Already Exists");
             res.status(200);
@@ -51,7 +51,7 @@ exports.registerPublisher = async (req,res,next)=>{
                 lastName: req.body.lastName,
                 email: req.body.email,
                 password: encryptedPassword,
-                role: req.body.role,
+                role: 'publisher',
                 balance: 0,
                 amount_earned: 0,
                 created_courses: [],
@@ -63,4 +63,35 @@ exports.registerPublisher = async (req,res,next)=>{
         }
 }
 
+
+
+
+exports.registerAdmin = async (req,res,next)=>{
+    
+    const isAlreadyExisting = await Admin.findOne({ email: req.body.email });
+    console.log(isAlreadyExisting);
+        if (isAlreadyExisting) {
+            res.send("Admin Already Exists");
+            res.status(200);
+            return;
+        }
+
+        else{
+            const encryptedPassword = await bcrypt.hash(req.body.password, saltRounds);
+            const result = await Admin.create({
+                firstName: req.body.firstName,
+                lastName: req.body.lastName,
+                email: req.body.email,
+                password: encryptedPassword,
+                role: 'admin',
+                totalRevenue: 0,
+                coursesRejected: [],
+                coursesApproved: []
+               
+            });
+ 
+            res.status(201).send(`Admin Created Successfully with id ${result._id}`);
+
+        }
+}
 

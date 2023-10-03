@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 
 exports.requireStudentOrAdminRole = (req, res, next) =>{
     const token = req.header('Authorization').split(' ')[1]; // "Bearer <token>"
-    
+  
     try {
       const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
       const userRole = decodedToken.role;
@@ -25,9 +25,8 @@ exports.requirePublisherOrAdminRole = async (req, res, next) => {
     const token = req.header('Authorization').split(' ')[1]; 
     
     try {
-    console.log(process.env.JWT_TOKEN);
+   
       const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
-      
       const userRole = decodedToken.role;
       const publisher_id = decodedToken.user_id;
 
@@ -38,29 +37,27 @@ exports.requirePublisherOrAdminRole = async (req, res, next) => {
         res.status(403).json({ message: 'Access denied. Publisher/ Admin role required.' });
       }
     } catch (error) {
-      res.status(401).json({ message: 'Uaauthorized' });
+      res.status(401).json({ message: 'Uauthorized' });
     }
   } 
 
 
-//   function requireAdminRoleOnly(req, res, next) {
+  exports.requireAdminRoleOnly = async (req, res, next) => {
    
-//     const token = req.header('Authorization').split(' ')[1]; // Assuming the token is sent as "Bearer <token>"
+    const token = req.header('Authorization').split(' ')[1]; 
     
-//     try {
-//     console.log(process.env.JWT_TOKEN);
-//       const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
+    try {
+      const decodedToken = jwt.verify(token, process.env.JWT_TOKEN);
+      const userRole = decodedToken.role;
+      const publisher_id = decodedToken.user_id;
       
-//       const userRole = decodedToken.role;
-//       const publisher_id = decodedToken.user_id;
-      
-//       if (userRole === 'admin') {
-//         next();
-//       } else {
-//         res.status(403).json({ message: 'Access denied. Admin role required.' });
-//       }
-//     } catch (error) {
-//       res.status(401).json({ message: 'Uauthorized' });
-//     }
-//   } 
+      if (userRole === 'admin') {
+        next();
+      } else {
+        res.status(403).json({ message: 'Access denied. Admin role required.' });
+      }
+    } catch (error) {
+      res.status(401).json({ message: 'Uauthorized' });
+    }
+  } 
 

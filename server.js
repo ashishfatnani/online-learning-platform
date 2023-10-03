@@ -7,11 +7,14 @@ const students = require("./routes/students");
 const courses = require("./routes/courses");
 const registration = require("./routes/registration");
 const login = require("./routes/login");
+const admin = require('./routes/admin');
 const changeProfile = require("./routes/change-profile");
 const {
   requireStudentOrAdminRole,
   requirePublisherOrAdminRole,
+  requireAdminRoleOnly
 } = require("./middleware/role-based-access");
+const { approveCourse } = require("./controllers/admin");
 
 dotenv.config({
   path: "./config/config.env",
@@ -27,15 +30,25 @@ app.use(express.json());
 
 // app.use("/api/v1/course", courses);
 
-app.use("/api/v1/courses", students, publishers);
+app.use("/api/v1/publishers/courses",requirePublisherOrAdminRole, publishers);
+app.use("/api/v1/students/courses", requireStudentOrAdminRole, students);
+// 
 //courses
-app.use("/api/v1/course", courses);
+//app.use("/api/v1/courseByPublisher", requirePublisherOrAdminRole, courses); // ADDED PUBLISHER ACCESS ONLY FOR NOW
 
 //register
 app.use("/api/v1/register", registration);
 
+//purchase
+
+
+
+
 //login
 app.use("/api/v1/login", login);
+
+app.use("/api/v1/admin", requireAdminRoleOnly, admin);
+
 
 //change-profile
 app.use(
@@ -49,7 +62,6 @@ app.use(
   changeProfile
 );
 
-//app.use("/api/v1/register", authentication)
 
 const port = process.env.PORT || 5000;
 

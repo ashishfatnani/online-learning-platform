@@ -1,19 +1,17 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
-const PublisherSchema = new mongoose.Schema(
+const AdminSchema = new mongoose.Schema(
   {
     firstName: {
       type: String,
       required: [true, "Please add first name"],
-     // unique: true,
       trim: true,
       maxlength: [50, "First Name can not be more than 50 characters"],
     },
     lastName: {
       type: String,
       required: [true, "Please add last name"],
-     // unique: true,
       trim: true,
       maxlength: [50, "Last Name can not be more than 50 characters"],
     },
@@ -26,14 +24,9 @@ const PublisherSchema = new mongoose.Schema(
         "Please add a valid email",
       ],
     },
-    contactNumber: {
-      type: String,
-      maxlength: [20, "Contact number can not be longer than 20 characters"],
-    },
     role: {
       type: String,
-     // enum: ["publisher"],
-      default: "publisher",
+      default: "admin",
     },
     password: {
       type: String,
@@ -41,34 +34,24 @@ const PublisherSchema = new mongoose.Schema(
       minlength: 6,
       select: true,
     },
-    // balance: {
-    //   type: Number,
-    //   default: 0,
-    // },
-    amountEarned: {
-      type: Number,
-      default: 0,
-    },
-    createdCourses: {
+    coursesApproved: {
       type: Array,
       default: [],
     },
-    amountEarnedFromCourses: {
-      type: Number,
-      default: 0,
+    coursesRejected: {
+        type: Array,
+        default: [],
+      },
+    totalRevenue:{
+        type: Number,
+        default: 0 
     },
     resetPasswordToken: String,
     resetPasswordExpire: Date,
-
     createdAt: {
       type: Date,
       default: Date.now,
     },
-    // publisher: {
-    //   type: mongoose.Schema.ObjectId,
-    //   ref: "Publisher",
-    //   required: true,
-    // },
   },
   {
     toJSON: { virtuals: true },
@@ -76,4 +59,4 @@ const PublisherSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Publisher", PublisherSchema);
+module.exports = mongoose.model("Admin", AdminSchema);
