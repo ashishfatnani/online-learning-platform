@@ -6,20 +6,21 @@ const PublisherSchema = new mongoose.Schema(
     firstName: {
       type: String,
       required: [true, "Please add first name"],
-      unique: true,
+     // unique: true,
       trim: true,
       maxlength: [50, " First Name can not be more than 50 characters"],
     },
     lastName: {
       type: String,
       required: [true, "Please add last name"],
-      unique: true,
+     // unique: true,
       trim: true,
       maxlength: [50, "Last Name can not be more than 50 characters"],
     },
     email: {
       type: String,
       require: true,
+      unique: true,
       match: [
         /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
         "Please add a valid email",
@@ -31,14 +32,14 @@ const PublisherSchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["publisher"],
+     // enum: ["publisher"],
       default: "publisher",
     },
     password: {
       type: String,
       required: [true, "Please add a password"],
       minlength: 6,
-      select: false,
+      select: true,
     },
     // balance: {
     //   type: Number,

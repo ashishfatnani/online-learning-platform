@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const connectDB = require("./config/db");
 const courses = require("./routes/courses");
+const registration = require("./routes/registration")
+const login = require("./routes/login");
 
 dotenv.config({
   path: "./config/config.env",
@@ -15,7 +17,18 @@ connectDB();
 //Body Parser
 app.use(express.json());
 
+//courses
 app.use("/api/v1/course", courses);
+
+//register
+app.use("/api/v1/register", registration)
+
+//login
+app.use("/api/v1/login", login)
+
+//app.use("/api/v1/register", authentication)
+
+
 
 const port = process.env.PORT || 5000;
 
