@@ -1,3 +1,4 @@
+
 /*  @desc -> Get all the courses
     @route -> GET /api/v1/course
     @access -> Private (students) 
