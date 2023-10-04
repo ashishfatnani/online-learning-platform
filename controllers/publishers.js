@@ -12,8 +12,6 @@ exports.createCourse = async (req, res, next) => {
       publisher: req.publisher_id,
     });
 
-    //console.log(`publisher id - -- -- - - -- - ${req.publisher_id}`);
-
     return res.status(201).json({
       success: true,
       data: createData,
@@ -35,19 +33,27 @@ exports.updateCourse = async (req, res, next) => {
   const updatedCourseData = req.body;
 
   try {
-    const course = await Course.findOne({courseId:req.params.id});
+    const course = await Course.findByIdAndUpdate(
+      req.params.id,
+      updatedCourseData,
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
     if (!course) {
       return res.status(404).json({
         success: false,
-        message: 'Course not found.',
+        message: "Course not found.",
       });
     }
 
-    // Update the course data
-    Object.assign(course, updatedCourseData);
+    // // Update the course data
+    // Object.assign(course, updatedCourseData);
 
-    // Save the updated course
-    await course.save();
+    // // Save the updated course
+    // await course.save();
 
     return res.status(200).json({
       success: true,
