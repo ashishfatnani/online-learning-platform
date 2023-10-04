@@ -30,6 +30,32 @@ exports.getMyStudentProfile = async (req, res, next) => {
     }
   };
 
+/*  @desc -> Get Publisher's profile
+    @route -> GET /api/v1/changePublisherProfile/getMyPublisherProfile
+    @access -> Publisher
+*/
+exports.getPublisherProfile = async (req, res, next) => {
+    try {
+      const findPublisherProfile = await Publisher.findById(req.publisher_id);
+      if (findPublisherProfile.role == "publisher" ) {
+        return res.status(400).json({
+          success: true,
+          data: findPublisherProfile
+        });
+      } else {
+        return res.status(400).json({
+          success: true,
+          message: "Publisher Profile"
+        });
+      }
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
 
 exports.changeStudentPassword = async (req, res, next)=>{
 
