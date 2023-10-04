@@ -4,6 +4,33 @@ const { ObjectId } = require('mongodb');
 const Publisher = require("../models/Publisher");
 const saltRounds = 10; 
 
+/*  @desc -> Get Student's profile
+    @route -> GET /api/v1/changeStudentProfile/getMyStudentProfile
+    @access -> Private (students) 
+*/
+exports.getMyStudentProfile = async (req, res, next) => {
+    try {
+      const findStudentProfile = await Student.findById(req.student_id);
+      if (findStudentProfile.role == "student" ) {
+        return res.status(400).json({
+          success: true,
+          data: findStudentProfile
+        });
+      } else {
+        return res.status(400).json({
+          success: true,
+          message: "Student Profile"
+        });
+      }
+    } catch (error) {
+      return res.status(400).json({
+        success: false,
+        message: error.message,
+      });
+    }
+  };
+
+
 exports.changeStudentPassword = async (req, res, next)=>{
 
     const studentInDB = await Student.findOne({_id: new ObjectId(req.student_id)});
