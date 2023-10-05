@@ -1,0 +1,775 @@
+{
+	"info": {
+		"_postman_id": "6c79fb2a-51a5-4689-a1e8-f3d831e83dcd",
+		"name": "Online-learning-platform",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "12013509",
+		"_collection_link": "https://online-learning-platform-545512.postman.co/workspace/New-Team-Workspace~0ddab797-082f-4af9-923f-3d3b73e60caf/collection/12013509-6c79fb2a-51a5-4689-a1e8-f3d831e83dcd?action=share&source=collection_link&creator=12013509"
+	},
+	"item": [
+		{
+			"name": "Courses",
+			"item": [
+				{
+					"name": "Create Course (Publisher)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"courseTitle\":\" ABC XYZ\",\r\n    \"courseDescription\":\"This idshfihsifhsdifhsdihf\",\r\n    \"website\":\"http://www.skdfsbf.com\",\r\n    \"coursePrice\":100,\r\n    \"duration\":1200,\r\n    \"courseContent\":{\r\n        \"modules\":{\r\n            \"c1\":\"Content 1\",\r\n            \"c2\":\"Content 1\",\r\n            \"c3\":\"Content 1\"\r\n        },\r\n        \"quizzes\":{\r\n            \"q1\":\"Content 1\",\r\n            \"q2\":\"Content 1\",\r\n            \"q3\":\"Content 1\"\r\n        },\r\n        \"assignments\":{\r\n            \"a1\":\"Content 1\",\r\n            \"a2\":\"Content 1\",\r\n            \"a3\":\"Content 1\"\r\n        }\r\n    }\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/publishers/courses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"publishers",
+								"courses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get all courses (Students)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/students/courses/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"courses",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get single course (Both)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/students/courses/651c5d78440e1d7ed5dca086",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"courses",
+								"651c5d78440e1d7ed5dca086"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Approved Courses(Publishers)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/publishers/courses/publishers/approvedcourses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"publishers",
+								"courses",
+								"publishers",
+								"approvedcourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Pending Courses (Publishers)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/publishers/courses/publishers/pendingcourses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"publishers",
+								"courses",
+								"publishers",
+								"pendingcourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Rejected Courses(Publishers)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjM2OTgwMywiZXhwIjoxNjk2Mzg3ODAzfQ.Y2A-31UwwWQOQbwbS0DUApZf_wmwJSuE8ydXoD0N2Ko",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/publishers/courses/publishers/rejectedcourses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"publishers",
+								"courses",
+								"publishers",
+								"rejectedcourses"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Course (Publishers)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"courseTitle\":\" Updated ABC XYZ\",\n    \"courseDescription\":\"UPDATE \",\n    \"website\":\"http://www.skdfsbf.com\",\n    \"coursePrice\":100,\n    \"duration\":1200,\n    \"courseContent\":{\n        \"modules\":{\n            \"c1\":\"Content 1\",\n            \"c2\":\"Content 1\",\n            \"c3\":\"Content 1\"\n        },\n        \"quizzes\":{\n            \"q1\":\"Content 1\",\n            \"q2\":\"Content 1\",\n            \"q3\":\"Content 1\"\n        },\n        \"assignments\":{\n            \"a1\":\"Content 1\",\n            \"a2\":\"Content 1\",\n            \"a3\":\"Content 1\"\n        }\n    }\n\n}"
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/courses/updatecourse/651c62a6f057071eb063cad1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"courses",
+								"updatecourse",
+								"651c62a6f057071eb063cad1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Purchase Course (Students)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MmU3MzM0Yjk2YzVhODk5N2MyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE2OTY0NDQ4NjUsImV4cCI6MTY5NjQ2Mjg2NX0.MsoOl9-Nf8Pl5LB9zVe_KOjFXk9GC30zSEuu5k2kmZA",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/students/courses/purchaseCourse/651ca85d8120682980649f84",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"courses",
+								"purchaseCourse",
+								"651ca85d8120682980649f84"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get My Courses (Students)",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MmU3MzM0Yjk2YzVhODk5N2MyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE2OTY0NTIzODgsImV4cCI6MTY5NjQ3MDM4OH0.3LgBT_z6xFd9RUmFSquerCtXw72BKI_bcA8GLy_ksUU",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/students/courses/mycourses",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"students",
+								"courses",
+								"mycourses"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Registration",
+			"item": [
+				{
+					"name": "student registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"ee\",\r\n    \"lastName\": \" D\",\r\n    \"email\": \"student@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"confirmPassword\": \"password\",\r\n    \"role\": \"student\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/register/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publisher registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"R\",\r\n    \"lastName\": \" D\",\r\n    \"email\": \"publisher@gmail.com\",\r\n    \"password\": \"password\",\r\n    \"confirmPassword\": \"password\",\r\n    \"role\": \"publisher\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/register/publisher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"publisher"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin registration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"admin\",\r\n    \"lastName\":\"amdin\",\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/register/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"register",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "student login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"student@gmail.com\",\r\n    \"password\": \"password2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/login/student",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"login",
+								"student"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "admin login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"admin@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/login/admin",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"login",
+								"admin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "publisher login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"publisher@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/login/publisher",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"login",
+								"publisher"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Change Profile",
+			"item": [
+				{
+					"name": "change student password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"password1\",\r\n    \"newPassword\": \"password2\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/changeStudentProfile/change-student-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"changeStudentProfile",
+								"change-student-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "change publisher password",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"currentPassword\": \"password\",\r\n    \"newPassword\": \"password1\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/v1/changePublisherProfile/change-publisher-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"changePublisherProfile",
+								"change-publisher-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get student profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MmU3MzM0Yjk2YzVhODk5N2MyIiwicm9sZSI6InN0dWRlbnQiLCJpYXQiOjE2OTY0NTc0MzgsImV4cCI6MTY5NjQ3NTQzOH0.M1v-sRs7QtAbD4DAdjOEyDhRvR8suAiAbI_IsOxDe2g",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/changeStudentProfile/getMyStudentProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"changeStudentProfile",
+								"getMyStudentProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get publisher profile",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4MzU3MzM0Yjk2YzVhODk5N2M2Iiwicm9sZSI6InB1Ymxpc2hlciIsImlhdCI6MTY5NjQ1OTQ4NywiZXhwIjoxNjk2NDc3NDg3fQ.Vs0DEShnvsjj3FlU1mR7r3CN25jnHXX_ysjL0c5Zj94",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/v1/changePublisherProfile/getPublisherProfile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"changePublisherProfile",
+								"getPublisherProfile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update publisher profile",
+					"request": {
+						"method": "GET",
+						"header": []
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Admin",
+			"item": [
+				{
+					"name": "approve course",
+					"request": {
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/admin/approveCourse/651c1972beb28884c3ce2b",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"approveCourse",
+								"651c1972beb28884c3ce2b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reject course",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4M2I3MzM0Yjk2YzVhODk5N2NhIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjk2MzcxNzE4LCJleHAiOjE2OTYzODk3MTh9.3yWyfRF3IQDqlfpqsarpYM-Nao9IUfNZ-JLAMxIF57k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/admin/rejectCourse/651c88d97334b96c5a8997d1",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"rejectCourse",
+								"651c88d97334b96c5a8997d1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all students",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4M2I3MzM0Yjk2YzVhODk5N2NhIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjk2MzcxNzE4LCJleHAiOjE2OTYzODk3MTh9.3yWyfRF3IQDqlfpqsarpYM-Nao9IUfNZ-JLAMxIF57k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/admin/getAllStudents",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"getAllStudents"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all publishers",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyX2lkIjoiNjUxYzg4M2I3MzM0Yjk2YzVhODk5N2NhIiwicm9sZSI6ImFkbWluIiwiaWF0IjoxNjk2MzcxNzE4LCJleHAiOjE2OTYzODk3MTh9.3yWyfRF3IQDqlfpqsarpYM-Nao9IUfNZ-JLAMxIF57k",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:5000/api/v1/admin/getAllPublishers",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"getAllPublishers"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
